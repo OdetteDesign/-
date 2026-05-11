@@ -3,167 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>探索你的內在守護光芒</title>
+    <title>心田漫遊：探索你的內在守護光芒</title>
     <style>
         :root {
-            --primary-color: #6b8e23;
-            --bg-color: #fdfaf5;
-            --text-color: #4a4a4a;
-            --accent-color: #d4a373;
+            --primary-color: #8fb935; /* 較亮的草綠，在深色背景下更顯眼 */
+            --bg-deep-blue: #0a192f; /* 深邃藍 */
+            --text-light: #e6f1ff;
+            --accent-gold: #ffca28; /* 金色星星與重點色 */
         }
 
         body {
             font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background: radial-gradient(circle at center, #112240 0%, #0a192f 100%);
+            color: var(--text-light);
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 繁星背景效果 */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            opacity: 0.4;
+            z-index: -1;
         }
 
         #quiz-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.05); /* 半透明玻璃擬態 */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             max-width: 450px;
             width: 90%;
             text-align: center;
-            overflow: hidden;
         }
 
-        .hero-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 16px;
-            margin-bottom: 1.5rem;
-            background: #eee;
-        }
-
-        h1 { color: var(--primary-color); font-size: 1.6rem; margin-top: 0; }
-        .question { font-size: 1.15rem; margin-bottom: 1.5rem; font-weight: bold; min-height: 3em; }
+        h1 { color: var(--accent-gold); font-size: 1.8rem; margin-top: 0; text-shadow: 0 0 10px rgba(255,202,40,0.3); }
+        .question { font-size: 1.2rem; margin-bottom: 2rem; font-weight: bold; min-height: 3em; color: white; }
         
-        .options { display: flex; flex-direction: column; gap: 0.8rem; }
+        .options { display: flex; flex-direction: column; gap: 1rem; }
         button {
-            padding: 0.9rem;
-            border: 1px solid #eee;
-            border-radius: 12px;
-            background: white;
+            padding: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            background: rgba(255,255,255,0.1);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             font-size: 1rem;
-            color: var(--text-color);
+            color: var(--text-light);
         }
-        button:active { transform: scale(0.98); }
-        button:hover { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
+        button:hover { 
+            background-color: var(--primary-color); 
+            color: #0a192f; 
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            font-weight: bold;
+        }
 
-        #result { display: none; animation: fadeIn 0.8s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        #result { display: none; animation: fadeIn 1s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         .bodhisattva-img {
-            width: 180px;
-            height: 180px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
-            border: 4px solid var(--bg-color);
-            margin: 1rem auto;
+            border: 3px solid var(--accent-gold);
+            margin: 1.5rem auto;
             object-fit: cover;
+            box-shadow: 0 0 20px rgba(255,202,40,0.2);
         }
 
-        .bodhisattva-name { color: var(--accent-color); font-size: 1.5rem; margin: 0.5rem 0; font-weight: bold; }
+        .bodhisattva-name { color: var(--accent-gold); font-size: 1.6rem; margin: 0.5rem 0; font-weight: bold; }
         .dharma-words { 
             font-style: italic; 
-            background: #fdfaf5; 
-            padding: 1.2rem; 
-            border-radius: 12px; 
-            margin: 1rem 0;
-            border-left: 5px solid var(--accent-color);
-            font-size: 0.95rem;
+            background: rgba(255,255,255,0.08); 
+            padding: 1.5rem; 
+            border-radius: 15px; 
+            margin: 1.5rem 0;
+            border-left: 5px solid var(--accent-gold);
+            font-size: 1rem;
             text-align: left;
+            line-height: 1.8;
         }
         .product-rec { 
-            background: #f1f8e9;
-            padding: 1rem;
-            border-radius: 12px;
+            background: rgba(143, 185, 53, 0.15);
+            padding: 1.2rem;
+            border-radius: 15px;
             color: var(--primary-color);
             font-weight: bold;
-            font-size: 0.9rem;
+            border: 1px dashed var(--primary-color);
         }
-        .restart-btn { margin-top: 1.5rem; background: #999; color: white; border: none; width: 100%; }
+        .restart-btn { margin-top: 2rem; background: none; border: 1px solid #666; color: #999; width: 100%; font-size: 0.9rem; }
+        .restart-btn:hover { background: #333; color: white; }
     </style>
 </head>
 <body>
 
 <div id="quiz-container">
     <div id="quiz-start">
-        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=500" class="hero-img" alt="有機心田">
-        <h1>🌱 我的守護光芒</h1>
-        <p>每一份善念，都是一顆種子。<br>探索你內在隱藏的菩薩善舉。</p>
-        <button onclick="startQuiz()" style="background: var(--primary-color); color: white; width: 100%;">開始探索</button>
+        <h1>✨ 心田漫遊 ✨</h1>
+        <p style="color: #8892b0;">在浩瀚星雲中<br>尋找那顆與你契合的慈悲種子</p>
+        <button onclick="startQuiz()" style="background: var(--primary-color); color: #0a192f; font-weight: bold; width: 100%; margin-top: 1rem;">啟程探索</button>
     </div>
 
     <div id="quiz-content" style="display:none;">
-        <div id="progress" style="font-size: 0.8rem; color: #999; margin-bottom: 0.5rem;"></div>
+        <div id="progress" style="font-size: 0.8rem; color: #8892b0; margin-bottom: 1rem;">✨ 靈魂探索中...</div>
         <div class="question" id="question-text"></div>
         <div class="options" id="options-container"></div>
     </div>
 
     <div id="result">
-        <img id="res-img" src="" class="bodhisattva-img">
+        <div id="res-img-container"></div>
         <div class="bodhisattva-name" id="b-name"></div>
         <div class="dharma-words" id="b-dharma"></div>
-        <p style="font-size: 0.85rem; color: #888;">✨ 契合您的菩薩行行動：</p>
+        <p style="font-size: 0.9rem; color: #8892b0; margin-bottom: 0.5rem;">🌙 您的菩薩行實踐指南：</p>
         <div class="product-rec" id="b-product"></div>
-        <button class="restart-btn" onclick="location.reload()">重新測驗</button>
+        <button class="restart-btn" onclick="location.reload()">再次遊歷</button>
     </div>
 </div>
 
 <script>
-    // 這裡請替換為您生成的圖片網址
+    // 請確保您的圖片檔案 (a.jpg, b.jpg, c.jpg, d.jpg) 已上傳至同一 GitHub 資料夾
     const images = {
-        A: "蓮花.jpg", // 觀音意象：蓮花
-        B: "文殊.jpg", // 文殊意象：智慧森林
-        C: "土地.jpg", // 地藏意象：厚實大地
-        D: "大地.jpg"  // 普賢意象：茁壯幼苗
+        A: "a.jpg", 
+        B: "b.jpg", 
+        C: "c.jpg", 
+        D: "d.jpg" 
     };
 
     const questions = [
         {
-            q: "看到庇護工場的小夥伴專注包裝時，你會？",
+            q: "當你在寂靜星空下漫步，看到需要幫助的人，你第一直覺是？",
             options: [
-                { text: "給予微笑並耐心等待", type: "A" },
-                { text: "思考流程如何精進", type: "B" },
-                { text: "多買幾份分享朋友", type: "C" },
-                { text: "靜心體會其汗水", type: "D" }
+                { text: "遞上一杯熱茶，給予最直接的溫暖", type: "A" },
+                { text: "思考如何從根本解決他的困境", type: "B" },
+                { text: "默默發願，願自己有更大的力量守護大眾", type: "C" },
+                { text: "立刻挽起袖子，用行動協助他度過難關", type: "D" }
             ]
         },
         {
-            q: "有機農作物上的蟲咬痕跡，讓你聯想到？",
+            q: "你認為「有機」與「星空」的共同點是什麼？",
             options: [
-                { text: "萬物共生的慈悲", type: "A" },
-                { text: "生態平衡的智慧", type: "B" },
-                { text: "農友堅定的願力", type: "C" },
-                { text: "親手落實的支持", type: "D" }
+                { text: "兩者都充滿了愛與包容的生命力", type: "A" },
+                { text: "都在呈現大自然精密的智慧邏輯", type: "B" },
+                { text: "都是人類需要傾盡一生守護的淨土", type: "C" },
+                { text: "都需要我們從日常小事開始實踐保育", type: "D" }
             ]
         },
         {
-            q: "壓力大時，你傾向如何找回平靜？",
+            q: "當你完成一天的辛勞，你希望帶給世界什麼樣的迴響？",
             options: [
-                { text: "找尋情感的溫暖連結", type: "A" },
-                { text: "靜坐閱讀啟發智慧", type: "B" },
-                { text: "投入服務忘卻自我", type: "C" },
-                { text: "執行健康的生活計畫", type: "D" }
+                { text: "像月光一樣柔和的安慰", type: "A" },
+                { text: "像北極星一樣清晰的指引", type: "B" },
+                { text: "像大地一樣深沉的依託", type: "C" },
+                { text: "像彗星一樣堅定執行的軌跡", type: "D" }
             ]
         }
     ];
 
     const results = {
-        A: { name: "觀世音菩薩｜慈悲心", dharma: "「慈悲不是一種能力，而是一種選擇。以柔軟心看待萬物，每一份購買都是溫暖的擁抱。」", product: "支持：手工烘焙餅乾、暖心草本茶" },
-        B: { name: "文殊菩薩｜智慧心", dharma: "「智慧是看清事物的本質。選擇純淨的食物，是看見了生命與環境的共生。願你回歸清明本心。」", product: "支持：純淨冷壓植物油、有機五穀粉" },
-        C: { name: "地藏菩薩｜大願心", dharma: "「腳下的每一寸土地，都承載著願力。你的每一份堅持，都在成就他人的自立之路。」", product: "支持：友善耕作大米、手工帆布袋" },
-        D: { name: "普賢菩薩｜實踐心", dharma: "「萬億願景，皆始於足下的行動。修行不在遠方，而在日常的穿衣吃飯間，親手淨化世界。」", product: "支持：環保洗劑、友善環境農產品" }
+        A: { name: "觀世音菩薩｜慈悲心", dharma: "「慈悲不是一種能力，而是一種選擇。心若柔軟，星光便能灑滿您的每一條路。」", product: "支持：手工烘焙餅乾、暖心草本茶" },
+        B: { name: "文殊菩薩｜智慧心", dharma: "「智慧如星辰指路，讓您在塵世中不迷失。選擇純淨，即是回歸最智慧的生活方式。」", product: "支持：純淨冷壓植物油、有機五穀粉" },
+        C: { name: "地藏菩薩｜大願心", dharma: "「願力如無邊宇宙，容納萬物。您的每一份堅持，都在成就他人的自立之路。」", product: "支持：友善耕作大米、手工帆布袋" },
+        D: { name: "普賢菩薩｜實踐心", dharma: "「修行不在遠方，而在您的每一個選擇中。將善念落實於足下，便是最美的菩薩行。」", product: "支持：環保洗劑、友善環境農產品" }
     };
 
     let currentStep = 0;
@@ -177,7 +192,6 @@
 
     function showQuestion() {
         const q = questions[currentStep];
-        document.getElementById('progress').innerText = `Step ${currentStep + 1} / ${questions.length}`;
         document.getElementById('question-text').innerText = q.q;
         const container = document.getElementById('options-container');
         container.innerHTML = '';
@@ -200,7 +214,10 @@
         document.getElementById('result').style.display = 'block';
         const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
         const res = results[winner];
-        document.getElementById('res-img').src = images[winner];
+        
+        const imgContainer = document.getElementById('res-img-container');
+        imgContainer.innerHTML = `<img src="${images[winner]}" class="bodhisattva-img">`;
+        
         document.getElementById('b-name').innerText = res.name;
         document.getElementById('b-dharma').innerText = res.dharma;
         document.getElementById('b-product').innerText = res.product;
