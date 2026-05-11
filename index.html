@@ -6,10 +6,11 @@
     <title>找尋那顆與你契合的慈悲種子</title>
     <style>
         :root {
-            --primary-color: #8fb935; /* 較亮的草綠，在深色背景下更顯眼 */
-            --bg-deep-blue: #0a192f; /* 深邃藍 */
+            --primary-color: #8fb935; /* 里仁綠 */
+            --bg-deep-blue: #0a192f;
             --text-light: #e6f1ff;
-            --accent-gold: #ffca28; /* 金色星星與重點色 */
+            --accent-gold: #ffca28;
+            --line-green: #06C755; /* LINE 品牌綠 */
         }
 
         body {
@@ -21,106 +22,121 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* 繁星背景效果 */
         body::before {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
+                radial-gradient(white, rgba(255,255,255,.15) 1.5px, transparent 30px),
+                radial-gradient(white, rgba(255,255,255,.1) 1px, transparent 20px);
+            background-size: 400px 400px, 250px 250px;
             opacity: 0.4;
             z-index: -1;
         }
 
         #quiz-container {
-            background: rgba(255, 255, 255, 0.05); /* 半透明玻璃擬態 */
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 2.5rem;
-            border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            max-width: 450px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 2rem;
+            border-radius: 35px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+            max-width: 480px;
             width: 90%;
             text-align: center;
+            margin: 20px 0;
         }
 
-        h1 { color: var(--accent-gold); font-size: 1.8rem; margin-top: 0; text-shadow: 0 0 10px rgba(255,202,40,0.3); }
-        .question { font-size: 1.2rem; margin-bottom: 2rem; font-weight: bold; min-height: 3em; color: white; }
+        h1 { color: var(--accent-gold); font-size: 1.7rem; margin-top: 0; letter-spacing: 2px; }
+        .question { font-size: 1.2rem; margin-bottom: 2rem; font-weight: bold; color: white; line-height: 1.6; min-height: 3.5em; }
         
-        .options { display: flex; flex-direction: column; gap: 1rem; }
+        .options { display: flex; flex-direction: column; gap: 0.8rem; }
         button {
-            padding: 1rem;
+            padding: 1.1rem;
             border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 15px;
-            background: rgba(255,255,255,0.1);
+            border-radius: 18px;
+            background: rgba(255,255,255,0.08);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             font-size: 1rem;
             color: var(--text-light);
+            text-align: left;
         }
-        button:hover { 
-            background-color: var(--primary-color); 
-            color: #0a192f; 
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-            font-weight: bold;
-        }
+        button:hover { background-color: var(--primary-color); color: #0a192f; font-weight: bold; }
 
-        #result { display: none; animation: fadeIn 1s ease-out; }
+        #result { display: none; animation: fadeIn 1.2s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         .bodhisattva-img {
-            width: 200px;
-            height: 200px;
+            width: 160px; height: 160px;
             border-radius: 50%;
-            border: 3px solid var(--accent-gold);
-            margin: 1.5rem auto;
+            border: 4px solid var(--accent-gold);
+            margin: 1rem auto;
             object-fit: cover;
-            box-shadow: 0 0 20px rgba(255,202,40,0.2);
         }
 
-        .bodhisattva-name { color: var(--accent-gold); font-size: 1.6rem; margin: 0.5rem 0; font-weight: bold; }
+        .bodhisattva-name { color: var(--accent-gold); font-size: 1.5rem; margin: 0.5rem 0; font-weight: bold; }
         .dharma-words { 
-            font-style: italic; 
-            background: rgba(255,255,255,0.08); 
-            padding: 1.5rem; 
-            border-radius: 15px; 
-            margin: 1.5rem 0;
-            border-left: 5px solid var(--accent-gold);
-            font-size: 1rem;
-            text-align: left;
-            line-height: 1.8;
+            font-style: italic; background: rgba(255,255,255,0.07); 
+            padding: 1.2rem; border-radius: 18px; margin: 1rem 0;
+            border-left: 6px solid var(--accent-gold); font-size: 0.95rem; text-align: left;
+            line-height: 1.7;
         }
+        
         .product-rec { 
-            background: rgba(143, 185, 53, 0.15);
-            padding: 1.2rem;
+            background: rgba(143, 185, 53, 0.1);
+            padding: 1rem;
             border-radius: 15px;
             color: var(--primary-color);
-            font-weight: bold;
             border: 1px dashed var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
         }
-        .restart-btn { margin-top: 2rem; background: none; border: 1px solid #666; color: #999; width: 100%; font-size: 0.9rem; }
-        .restart-btn:hover { background: #333; color: white; }
+
+        /* 按鈕樣式 */
+        .btn-group { display: flex; flex-direction: column; gap: 0.8rem; }
+        
+        .action-link {
+            display: block;
+            background-color: var(--accent-gold);
+            color: #0a192f;
+            text-decoration: none;
+            padding: 0.9rem;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .line-link {
+            display: block;
+            background-color: var(--line-green);
+            color: white;
+            text-decoration: none;
+            padding: 0.9rem;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(6, 199, 85, 0.3);
+        }
+
+        .restart-btn { margin-top: 1.5rem; background: none; border: 1px solid #555; color: #888; width: 100%; padding: 0.5rem; border-radius: 10px; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div id="quiz-container">
     <div id="quiz-start">
-        <h1>✨ 我最亮的心 ✨</h1>
-        <p style="color: #8892b0;">在浩瀚星雲中<br>尋找那顆與你契合的慈悲種子</p>
-        <button onclick="startQuiz()" style="background: var(--primary-color); color: #0a192f; font-weight: bold; width: 100%; margin-top: 1rem;">啟程探索</button>
+        <h1>宇宙賜予你的 ✨ 最亮的心</h1>
+        <p style="color: #8892b0;">在浩瀚星雲中<br>尋找那顆你隱藏的慈悲種子</p>
+        <button onclick="startQuiz()" style="background: var(--primary-color); color: #0a192f; font-weight: bold; width: 100%; text-align: center; margin-top: 1.5rem;">啟動探索</button>
     </div>
 
     <div id="quiz-content" style="display:none;">
-        <div id="progress" style="font-size: 0.8rem; color: #8892b0; margin-bottom: 1rem;">✨ 靈魂探索中...</div>
+        <div id="progress" style="font-size: 0.8rem; color: #8fb935; margin-bottom: 1.2rem; font-weight: bold;"></div>
         <div class="question" id="question-text"></div>
         <div class="options" id="options-container"></div>
     </div>
@@ -129,56 +145,106 @@
         <div id="res-img-container"></div>
         <div class="bodhisattva-name" id="b-name"></div>
         <div class="dharma-words" id="b-dharma"></div>
-        <p style="font-size: 0.9rem; color: #8892b0; margin-bottom: 0.5rem;">🌙 您的菩薩行實踐指南：</p>
-        <div class="product-rec" id="b-product"></div>
-        <button class="restart-btn" onclick="location.reload()">再次遊歷</button>
+        <div class="product-rec" id="b-product-text"></div>
+        
+        <div class="btn-group">
+            <a id="b-link" href="#" target="_blank" class="action-link">🛍️ 立即護持商品</a>
+            <a id="b-line" href="https://line.me/ti/g2/YOUR_LINK" target="_blank" class="line-link">💬 加入里仁好友社群</a>
+        </div>
+
+        <button class="restart-btn" onclick="location.reload()">再次探索</button>
     </div>
 </div>
 
 <script>
-    // 請確保您的圖片檔案 (a.jpg, b.jpg, c.jpg, d.jpg) 已上傳至同一 GitHub 資料夾
-    const images = {
-        A: "蓮花.jpg", 
-        B: "文殊.jpg", 
-        C: "土地.jpg", 
-        D: "大地.jpg" 
-    };
+    const images = { A: "蓮花.jpg", B: "文殊.jpg", C: "土地.jpg", D: "大地.jpg" };
 
     const questions = [
         {
-            q: "當你在寂靜星空下漫步，看到需要幫助的人，你第一直覺是？",
+            q: "1. 走進里仁門市，最吸引你的氛圍是什麼？",
             options: [
-                { text: "遞上一杯熱茶，給予最直接的溫暖", type: "A" },
-                { text: "思考如何從根本解決他的困境", type: "B" },
-                { text: "默默發願，願自己有更大的力量守護大眾", type: "C" },
-                { text: "立刻挽起袖子，用行動協助他度過難關", type: "D" }
+                { text: "像家一般溫暖的問候與關懷", type: "A" },
+                { text: "透明無添加、讓人安心的成分標示", type: "B" },
+                { text: "堅持守護土地、與農友共好的願力", type: "C" },
+                { text: "生活中處處可見的減塑與環保實踐", type: "D" }
             ]
         },
         {
-            q: "有機農作物上的蟲咬痕跡，讓你聯想到什麼？",
+            q: "2. 里仁堅持不使用人工添加物，你認為這代表？",
             options: [
-                { text: "萬物共生的慈悲", type: "A" },
-                { text: "生態平衡的智慧", type: "B" },
-                { text: "農友堅定的願力", type: "C" },
-                { text: "親手落實的支持", type: "D" }
+                { text: "對生命健康最細膩的呵護", type: "A" },
+                { text: "回歸天然本質的生活智慧", type: "B" },
+                { text: "對誠信價值的終極守護", type: "C" },
+                { text: "用消費支持純淨世界的行動", type: "D" }
             ]
         },
         {
-            q: "壓力大時，你傾向如何找回平靜？",
+            q: "3. 當看到農友為了保育土地而接受產量減少，你會？",
             options: [
-                { text: "找尋溫暖的情感連結", type: "A" },
-                { text: "靜坐閱讀，啟發智慧", type: "B" },
-                { text: "投入服務，忘卻自我", type: "C" },
-                { text: "執行健康的生活計畫", type: "D" }
+                { text: "感同身受，想親自為農友加油打氣", type: "A" },
+                { text: "深信這是生態循環最正確的選擇", type: "B" },
+                { text: "感佩這份「捨得」的大願心", type: "C" },
+                { text: "透過穩定購買，成為農友最實質的支柱", type: "D" }
+            ]
+        },
+        {
+            q: "4. 你認為「誠信」在生活中最像哪種光芒？",
+            options: [
+                { text: "像燭光，在寒冷中帶來撫慰", type: "A" },
+                { text: "像北極星，指引不偏不倚的方向", type: "B" },
+                { text: "像恆星，恆久守護土地與承諾", type: "C" },
+                { text: "像晨曦，用行動喚醒美好的開始", type: "D" }
+            ]
+        },
+        {
+            q: "5. 面對大地母親的呼喚，你最想如何響應？",
+            options: [
+                { text: "分享愛與善意，溫暖周遭的每個人", type: "A" },
+                { text: "學習並傳播正確的友善環境知識", type: "B" },
+                { text: "護持契作，讓農友無後顧之憂", type: "C" },
+                { text: "落實減塑，讓清淨實踐於柴米油鹽中", type: "D" }
+            ]
+        },
+        {
+            q: "6. 看到庇護工場的小夥伴努力克服困難學習自力更生，你最想？",
+            options: [
+                { text: "給予滿滿鼓勵，認同這份不平凡的生命力", type: "A" },
+                { text: "肯定產品品質，用平等心看待他們的努力", type: "B" },
+                { text: "默默發願，願成為這份愛心事業的護持者", type: "C" },
+                { text: "立刻將這份充滿愛與溫度的商品帶回家", type: "D" }
             ]
         }
     ];
 
     const results = {
-        A: { name: "觀世音菩薩｜慈悲心", dharma: "「慈悲不是一種能力，而是一種選擇。心若柔軟，星光便能灑滿您的每一條路。」", product: "支持：手工烘焙餅乾、暖心草本茶" },
-        B: { name: "文殊菩薩｜智慧心", dharma: "「智慧如星辰指路，讓您在塵世中不迷失。選擇純淨，即是回歸最智慧的生活方式。」", product: "支持：純淨冷壓植物油、有機五穀粉" },
-        C: { name: "地藏菩薩｜大願心", dharma: "「願力如無邊宇宙，容納萬物。您的每一份堅持，都在成就他人的自立之路。」", product: "支持：友善耕作大米、手工帆布袋" },
-        D: { name: "普賢菩薩｜實踐心", dharma: "「修行不在遠方，而在您的每一個選擇中。將善念落實於足下，便是最美的菩薩行。」", product: "支持：環保洗劑、友善環境農產品" }
+        A: { 
+            name: "觀世音菩薩｜慈悲心", 
+            dharma: "「誠信是里仁的根，慈悲是里仁的魂。心若柔軟，便能看見弱勢生命中閃耀的星光。」", 
+            product: "契合商品：由庇護工場包裝的那顆星-乳酪星星魚",
+            link: "https://www.leezen.com.tw/product/detail/893?srsltid=AfmBOoq-7HFTsf5TlI0ySrdMISm7KMmm_mdaMS939FEORJXXWv5ebpal",
+            line: "https://line.me/ti/g2/mR34slTYgCfE9LXnb3g9ZJvqce7otmAKcwu5PQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" // 可放特定社群連結
+        },
+        B: { 
+            name: "文殊菩薩｜智慧心", 
+            dharma: "「明辨是非，更要看見良善的價值。選擇純淨與支持公益，就是最有智慧的生活實踐。」", 
+            product: "契合商品：純淨冷壓植物油",
+            link: "https://www.leezen.com.tw/product.php?cat=10",
+            line: "https://line.me/ti/g2/mR34slTYgCfE9LXnb3g9ZJvqce7otmAKcwu5PQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
+        },
+        C: { 
+            name: "地藏菩薩｜大願心", 
+            dharma: "「大願如大地，承載萬物而不辭。您的每一份穩定支持，都是夥伴最踏實的依託。」", 
+            product: "契合商品：友善耕作大米",
+            link: "https://www.leezen.com.tw/product.php?cat=9",
+            line: "https://line.me/ti/g2/mR34slTYgCfE9LXnb3g9ZJvqce7otmAKcwu5PQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
+        },
+        D: { 
+            name: "普賢菩薩｜實踐心", 
+            dharma: "「道在足下，行在日常。將對大地的愛化為具體的購買行動，這便是最美的菩薩行。」", 
+            product: "契合商品：環保洗劑、友善環境農產品",
+            link: "https://www.leezen.com.tw/product.php?cat=135",
+            line: "https://line.me/ti/g2/mR34slTYgCfE9LXnb3g9ZJvqce7otmAKcwu5PQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
+        }
     };
 
     let currentStep = 0;
@@ -192,6 +258,7 @@
 
     function showQuestion() {
         const q = questions[currentStep];
+        document.getElementById('progress').innerText = `✨ 探索進度 ${currentStep + 1} / 6`;
         document.getElementById('question-text').innerText = q.q;
         const container = document.getElementById('options-container');
         container.innerHTML = '';
@@ -206,22 +273,4 @@
     function selectOption(type) {
         scores[type]++;
         currentStep++;
-        currentStep < questions.length ? showQuestion() : showResult();
-    }
-
-    function showResult() {
-        document.getElementById('quiz-content').style.display = 'none';
-        document.getElementById('result').style.display = 'block';
-        const winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
-        const res = results[winner];
-        
-        const imgContainer = document.getElementById('res-img-container');
-        imgContainer.innerHTML = `<img src="${images[winner]}" class="bodhisattva-img">`;
-        
-        document.getElementById('b-name').innerText = res.name;
-        document.getElementById('b-dharma').innerText = res.dharma;
-        document.getElementById('b-product').innerText = res.product;
-    }
-</script>
-</body>
-</html>
+        currentStep < questio
