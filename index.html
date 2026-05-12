@@ -166,10 +166,10 @@
     ];
 
     const results = {
-        A: { n: "蓮花天使｜慈悲心", d: "「誠信是里仁的根，慈悲是靈魂。心若柔軟，便能看見弱勢生命中閃耀的星光。」", l: "https://www.leezen.com.tw/product/detail/425?srsltid=AfmBOorbwE3fGmJH1ZyhWQUxktskUaW7X9ySzhrfVySLPNQ3wJJHXj93", i: "蓮花.jpg" },
-        B: { n: "通達菩薩｜智慧心", d: "「明辨是非，看見良善價值。選擇純淨與支持公益，就是最有智慧的生活實踐。」", l: "https://www.leezen.com.tw/product/detail/893?srsltid=AfmBOooQk9osGFqCSg0G1vQs72hWMBCM25THnfm1nZH5Vwh1CZGGXO5U", i: "文殊.jpg" },
-        C: { n: "大地母親｜大願心", d: "「大願如大地，承載萬物而不辭。您的每一份穩定支持，都是夥伴最踏實的依託。」", l: "https://www.leezen.com.tw/product/detail/297?srsltid=AfmBOorLUvoCs_Z8uxpNPjw0C2okf2CoWQL5hjz2G9qqdQ24ilEipFz5", i: "土地.jpg" },
-        D: { n: "小樹精靈｜實踐心", d: "「道在足下，行在日常。將對大地的愛化為具體的購買行動，這便是最美的善行。」", l: "https://www.leezen.com.tw/product/detail/2013?srsltid=AfmBOooMql09IZY_YNgAM7ug3ppRZCJcJzLsf4ycv7O5is5IQJEYkLQv", i: "大地.jpg" }
+        A: { n: "蓮花天使｜慈悲心", d: "「誠信是里仁的根，慈悲是靈魂。心若柔軟，便能看見弱勢生命中閃耀的星光。」", l: "https://www.leezen.com.tw/product/detail/425?srsltid=AfmBOorbwE3fGmJH1ZyhWQUxktskUaW7X9ySzhrfVySLPNQ3wJJHXj93", i: "蓮花.jpg", btnText: "公平貿易黑咖啡推薦給你" },
+        B: { n: "通達菩薩｜智慧心", d: "「明辨是非，看見良善價值。選擇純淨與支持公益，就是最有智慧的生活實踐。」", l: "https://www.leezen.com.tw/product/detail/893?srsltid=AfmBOooQk9osGFqCSg0G1vQs72hWMBCM25THnfm1nZH5Vwh1CZGGXO5U", i: "文殊.jpg", btnText: "乳酪星星魚推薦給你" },
+        C: { n: "大地母親｜大願心", d: "「大願如大地，承載萬物而不辭。您的每一份穩定支持，都是夥伴最踏實的依託。」", l: "https://www.leezen.com.tw/product/detail/297?srsltid=AfmBOorLUvoCs_Z8uxpNPjw0C2okf2CoWQL5hjz2G9qqdQ24ilEipFz5", i: "土地.jpg", btnText: "有機黑糯糙米推薦給你" },
+        D: { n: "小樹精靈｜實踐心", d: "「道在足下，行在日常。將對大地的愛化為具體的購買行動，這便是最美的善行。」", l: "https://www.leezen.com.tw/product/detail/2013?srsltid=AfmBOooMql09IZY_YNgAM7ug3ppRZCJcJzLsf4ycv7O5is5IQJEYkLQv", i: "大地.jpg", btnText: "有機薑黃粉推薦給你" }
     };
 
     function goQuiz() {
@@ -200,14 +200,22 @@
     }
 
     function showFinal() {
+        // 1. 切換畫面：隱藏測驗，顯示結果
         document.getElementById('view-quiz').style.display = 'none';
         document.getElementById('view-result').style.display = 'block';
+
+        // 2. 計算得分最高的結果 (A, B, C 或 D)
         let top = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
         let r = results[top];
+        
+        // 3. 更新結果頁面的內容
         document.getElementById('res-img').innerHTML = `<img src="${r.i}">`;
         document.getElementById('res-name').innerText = r.n;
         document.getElementById('res-dharma').innerText = r.d;
-        document.getElementById('link-product').href = r.l;
+        
+        // 4. 【關鍵改動】更新按鈕的「網址」與「文字」
+        document.getElementById('link-product').href = r.l;     // 更新連結網址 (來自 results 的 l)
+        document.getElementById('link-product').innerText = r.b;  // 更新按鈕文字 (來自 results 的 b)
     }
 </script>
 </body>
