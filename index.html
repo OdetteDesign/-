@@ -6,7 +6,7 @@
     <title>找尋那顆與你契合的慈悲種子</title>
     <style>
         :root {
-            --primary-color: #8fb935; /* 里仁綠 */
+            --primary-color: #8fb935; 
             --bg-deep-blue: #0a192f;
             --text-light: #e6f1ff;
             --accent-gold: #ffca28;
@@ -25,7 +25,6 @@
             overflow-x: hidden;
         }
 
-        /* 星空背景 */
         body::before {
             content: "";
             position: absolute;
@@ -94,26 +93,29 @@
         
         .btn-group { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1rem; }
         
-        .action-link {
+        .action-link, .line-link {
             display: block;
-            background-color: var(--accent-gold);
-            color: #0a192f;
             text-decoration: none;
             padding: 1rem;
             border-radius: 15px;
             font-weight: bold;
             font-size: 1rem;
+            transition: 0.3s;
         }
+        .action-link { background-color: var(--accent-gold); color: #0a192f; }
+        .line-link { background-color: var(--line-green); color: white; }
 
-        .line-link {
-            display: block;
-            background-color: var(--line-green);
-            color: white;
-            text-decoration: none;
-            padding: 1rem;
-            border-radius: 15px;
-            font-weight: bold;
-            font-size: 1rem;
+        #start-btn-trigger {
+            background: var(--primary-color); 
+            color: #0a192f; 
+            font-weight: bold; 
+            width: 100%; 
+            margin-top: 1.5rem; 
+            padding: 1rem; 
+            border-radius: 15px; 
+            border: none; 
+            cursor: pointer; 
+            font-size: 1.1rem;
         }
 
         .restart-btn { margin-top: 2rem; background: none; border: 1px solid #555; color: #888; width: 100%; padding: 0.8rem; border-radius: 12px; cursor: pointer; }
@@ -122,38 +124,35 @@
 <body>
 
 <div id="quiz-container">
-    <!-- 初始畫面 -->
     <div id="quiz-start">
         <h1>找尋那顆與你契合的<br>✨ 慈悲種子 ✨</h1>
         <p style="color: #8892b0; font-size: 1rem; line-height: 1.8;">「隱藏內心深處善的力量」<br>在星際漫遊中遇見最純粹的自己</p>
-        <button onclick="startQuiz()" style="background: var(--primary-color); color: #0a192f; font-weight: bold; width: 100%; text-align: center; margin-top: 1.5rem; padding: 1rem; border-radius: 15px; border: none; cursor: pointer; font-size: 1.1rem;">啟動靈魂探索</button>
+        <button id="start-btn-trigger">啟動靈魂探索</button>
     </div>
 
-    <!-- 測驗內容區 -->
     <div id="quiz-content" style="display:none;">
         <div id="progress" style="font-size: 0.8rem; color: #8fb935; margin-bottom: 1.2rem; font-weight: bold;"></div>
         <div class="question" id="question-text"></div>
         <div class="options" id="options-container"></div>
     </div>
 
-    <!-- 結果顯示區 -->
     <div id="result">
         <div id="res-img-container"></div>
         <div class="bodhisattva-name" id="b-name"></div>
         <div class="dharma-words" id="b-dharma"></div>
-        
         <div class="btn-group">
             <a id="b-link" href="#" target="_blank" class="action-link">🛍️ 愛心商品等你守護</a>
             <a id="b-line" href="#" target="_blank" class="line-link">💬 加入昌平里仁好友社群</a>
         </div>
-
-        <button class="restart-btn" onclick="location.reload()">再次探索心田</button>
+        <button class="restart-btn" id="restart-trigger">再次探索心田</button>
     </div>
 </div>
 
 <script>
-    const images = { A: "蓮花.jpg", B: "文殊.jpg", C: "大地.jpg", D: "土地.jpg" };
+    // 圖片設定
+    const images = { A: "a.jpg", B: "b.jpg", C: "c.jpg", D: "d.jpg" };
 
+    // 題目設定
     const questions = [
         {
             q: "1. 當你在寂靜星空下漫步，看到需要幫助的人，你會⋯？",
@@ -212,36 +211,34 @@
     ];
 
     const results = {
-        A: { 
-            name: "觀世音菩薩｜慈悲心", 
-            dharma: "「誠信是里仁的根，慈悲是里仁的魂。心若柔軟，便能看見弱勢生命中閃耀的星光。願您以愛擁抱世界。」", 
-            link: "https://www.leezen.com.tw/product.php?cat=127",
-            line: "https://line.me/ti/g2/YOUR_LINK" 
-        },
-        B: { 
-            name: "文殊菩薩｜智慧心", 
-            dharma: "「明辨是非，更要看見良善的價值。選擇純淨與支持公益，就是最有智慧的生活實踐。願您心如明鏡。」", 
-            link: "https://www.leezen.com.tw/product.php?cat=10",
-            line: "https://line.me/ti/g2/YOUR_LINK"
-        },
-        C: { 
-            name: "地藏菩薩｜大願心", 
-            dharma: "「大願如大地，承載萬物而不辭。您的每一份穩定支持，都是夥伴最踏實的依託。願您初心不變。」", 
-            link: "https://www.leezen.com.tw/product.php?cat=9",
-            line: "https://line.me/ti/g2/YOUR_LINK"
-        },
-        D: { 
-            name: "普賢菩薩｜實踐心", 
-            dharma: "「道在足下，行在日常。將對大地的愛化為具體的購買行動，這便是最美的菩薩行。」", 
-            link: "https://www.leezen.com.tw/product.php?cat=135",
-            line: "https://line.me/ti/g2/YOUR_LINK"
-        }
+        A: { name: "觀世音菩薩｜慈悲心", dharma: "「誠信是里仁的根，慈悲是里仁的魂。心若柔軟，便能看見弱勢生命中閃耀的星光。」", link: "https://www.leezen.com.tw/product.php?cat=127", line: "https://line.me/ti/g2/YOUR_LINK" },
+        B: { name: "文殊菩薩｜智慧心", dharma: "「明辨是非，更要看見良善的價值。選擇純淨與支持公益，就是最有智慧的生活實踐。」", link: "https://www.leezen.com.tw/product.php?cat=10", line: "https://line.me/ti/g2/YOUR_LINK" },
+        C: { name: "地藏菩薩｜大願心", dharma: "「大願如大地，承載萬物而不辭。您的每一份穩定支持，都是夥伴最踏實的依託。」", link: "https://www.leezen.com.tw/product.php?cat=9", line: "https://line.me/ti/g2/YOUR_LINK" },
+        D: { name: "普賢菩薩｜實踐心", dharma: "「道在足下，行在日常。將對大地的愛化為具體的購買行動，這便是最美的菩薩行。」", link: "https://www.leezen.com.tw/product.php?cat=135", line: "https://line.me/ti/g2/YOUR_LINK" }
     };
 
     let currentStep = 0;
     let scores = { A: 0, B: 0, C: 0, D: 0 };
 
+    // 初始化與事件綁定
+    window.onload = function() {
+        console.log("里仁測驗系統載入完成");
+        
+        const startBtn = document.getElementById('start-btn-trigger');
+        if(startBtn) {
+            startBtn.addEventListener('click', startQuiz);
+        }
+
+        const restartBtn = document.getElementById('restart-trigger');
+        if(restartBtn) {
+            restartBtn.addEventListener('click', function() {
+                location.reload();
+            });
+        }
+    };
+
     function startQuiz() {
+        console.log("測驗開始");
         document.getElementById('quiz-start').style.display = 'none';
         document.getElementById('quiz-content').style.display = 'block';
         showQuestion();
@@ -253,11 +250,14 @@
         document.getElementById('question-text').innerText = q.q;
         const container = document.getElementById('options-container');
         container.innerHTML = '';
+        
         q.options.forEach(opt => {
             const btn = document.createElement('button');
             btn.className = 'option-btn';
             btn.innerText = opt.text;
-            btn.onclick = () => selectOption(opt.type);
+            btn.addEventListener('click', function() {
+                selectOption(opt.type);
+            });
             container.appendChild(btn);
         });
     }
@@ -271,9 +271,3 @@
             showResult();
         }
     }
-
-    function showResult() {
-        document.getElementById('quiz-content').style.display = 'none';
-        document.getElementById('result').style.display = 'block';
-        
-        const winner = Object.keys
