@@ -213,9 +213,9 @@
         document.getElementById('res-name').innerText = r.n;
         document.getElementById('res-dharma').innerText = r.d;
         
-        // 4. 【關鍵改動】更新按鈕的「網址」與「文字」
-        document.getElementById('link-product').href = r.l;     // 更新連結網址 (來自 results 的 l)
-        document.getElementById('link-product').innerText = r.b;  // 更新按鈕文字 (來自 results 的 b)
+        // 4. 更新按鈕內容
+        document.getElementById('link-product').href = r.l;     // 更新連結
+        document.getElementById('link-product').innerText = r.btnText;  // 這裡要對應 results 裡的 btnText
     }
 </script>
 </body>
