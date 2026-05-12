@@ -130,8 +130,8 @@
 
 <div id="quiz-container">
     <div id="quiz-start">
-        <h1>宇宙賜予你的 ✨ 最亮的心</h1>
-        <p style="color: #8892b0;">在浩瀚星雲中<br>尋找那顆你隱藏的慈悲種子</p>
+        <h1>隱藏內心深處善的力量✨ </h1>
+        <p style="color: #8892b0;">你最亮的星<br>尋找您的守護光芒</p>
         <button onclick="startQuiz()" style="background: var(--primary-color); color: #0a192f; font-weight: bold; width: 100%; text-align: center; margin-top: 1.5rem;">啟動探索</button>
     </div>
 
@@ -148,8 +148,8 @@
         <div class="product-rec" id="b-product-text"></div>
         
         <div class="btn-group">
-            <a id="b-link" href="#" target="_blank" class="action-link">🛍️ 立即護持商品</a>
-            <a id="b-line" href="https://line.me/ti/g2/YOUR_LINK" target="_blank" class="line-link">💬 加入里仁好友社群</a>
+            <a id="b-link" href="#" target="_blank" class="action-link">🛍️ 愛心商品等你守護</a>
+            <a id="b-line" href="https://line.me/ti/g2/YOUR_LINK" target="_blank" class="line-link">💬 加入昌平里仁好友社群</a>
         </div>
 
         <button class="restart-btn" onclick="location.reload()">再次探索</button>
@@ -157,16 +157,16 @@
 </div>
 
 <script>
-    const images = { A: "蓮花.jpg", B: "文殊.jpg", C: "土地.jpg", D: "大地.jpg" };
+    const images = { A: "a.jpg", B: "b.jpg", C: "c.jpg", D: "d.jpg" };
 
     const questions = [
         {
-            q: "1. 走進里仁門市，最吸引你的氛圍是什麼？",
+            q: "1. 當你在寂靜星空下漫步，看到需要幫助的人，你第一直覺是？",
             options: [
-                { text: "像家一般溫暖的問候與關懷", type: "A" },
-                { text: "透明無添加、讓人安心的成分標示", type: "B" },
-                { text: "堅持守護土地、與農友共好的願力", type: "C" },
-                { text: "生活中處處可見的減塑與環保實踐", type: "D" }
+                { text: "遞上一杯熱茶，默默坐在他身邊", type: "A" },
+                { text: "走向前詢問是否需要協助", type: "B" },
+                { text: "在旁邊觀察並默默發願，願某天有能力守護更多的人", type: "C" },
+                { text: "捲起袖子，思考如何從根本解決他的困境", type: "D" }
             ]
         },
         {
@@ -220,29 +220,29 @@
         A: { 
             name: "觀世音菩薩｜慈悲心", 
             dharma: "「誠信是里仁的根，慈悲是里仁的魂。心若柔軟，便能看見弱勢生命中閃耀的星光。」", 
-            product: "契合商品：由庇護工場包裝的那顆星-乳酪星星魚",
-            link: "https://www.leezen.com.tw/product/detail/893?srsltid=AfmBOoq-7HFTsf5TlI0ySrdMISm7KMmm_mdaMS939FEORJXXWv5ebpal",
+            product: "契合商品：庇護工場手工餅乾—乳酪星星魚，一起成為照亮別人的星。",
+            link: "https://www.leezen.com.tw/product/detail/893",
             line: "https://line.me/ti/g2/mR34slTYgCfE9LXnb3g9ZJvqce7otmAKcwu5PQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" // 可放特定社群連結
         },
         B: { 
             name: "文殊菩薩｜智慧心", 
-            dharma: "「明辨是非，更要看見良善的價值。選擇純淨與支持公益，就是最有智慧的生活實踐。」", 
-            product: "契合商品：純淨冷壓植物油",
-            link: "https://www.leezen.com.tw/product.php?cat=10",
+            dharma: "「明辨是非，更要看見良善的價值。選擇純淨與支持公平貿益，就是最有智慧的生活實踐。」", 
+            product: "契合商品：公平貿易純黑即溶咖啡—友善生活的濃、醇、香。",
+            link: "https://www.leezen.com.tw/product/detail/425",
             line: "https://line.me/ti/g2/mR34slTYgCfE9LXnb3g9ZJvqce7otmAKcwu5PQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
         },
         C: { 
             name: "地藏菩薩｜大願心", 
             dharma: "「大願如大地，承載萬物而不辭。您的每一份穩定支持，都是夥伴最踏實的依託。」", 
-            product: "契合商品：友善耕作大米",
-            link: "https://www.leezen.com.tw/product.php?cat=9",
+            product: "契合商品：友善耕作大米—有機黑糯糙米—推薦給你，",
+            link: "https://www.leezen.com.tw/product/detail/2013?srsltid=AfmBOoo8ZCRfAkJv11curN7SSKCQN9ymn1DsTCpephgn-j1lpLDBtFJy",
             line: "https://line.me/ti/g2/mR34slTYgCfE9LXnb3g9ZJvqce7otmAKcwu5PQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
         },
         D: { 
             name: "普賢菩薩｜實踐心", 
             dharma: "「道在足下，行在日常。將對大地的愛化為具體的購買行動，這便是最美的菩薩行。」", 
-            product: "契合商品：環保洗劑、友善環境農產品",
-            link: "https://www.leezen.com.tw/product.php?cat=135",
+            product: "契合商品：友善環境農產品，有機薑黃粉推薦給你",
+            link: "https://www.leezen.com.tw/product/detail/297",
             line: "https://line.me/ti/g2/mR34slTYgCfE9LXnb3g9ZJvqce7otmAKcwu5PQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
         }
     };
